@@ -40,28 +40,28 @@ class ViewTestCase(TestCase):
 
     def test_api_can_get_a_list(self):
         """Test the api can get a given list."""
-        bucketlist = List.objects.get()
+        lists = List.objects.get()
         response = self.client.get(
             reverse('details',
-            kwargs={'pk': bucketlist.id}), format="json")
+            kwargs={'lists': lists.id}), format="json")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(response, bucketlist)
+        self.assertContains(response, lists)
 
     def test_api_can_update_list(self):
         """Test the api can update a given bucketlist."""
-        change_bucketlist = {'name': 'Something new'}
+        change_list = {'name': 'Something new'}
         res = self.client.put(
-            reverse('details', kwargs={'pk': bucketlist.id}),
+            reverse('details', kwargs={'lists': lists.id}),
             change_bucketlist, format='json'
         )
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
     def test_api_can_delete_list(self):
         """Test the api can delete a bucketlist."""
-        bucketlist = List.objects.get()
+        lists = List.objects.get()
         response = self.client.delete(
-            reverse('details', kwargs={'pk': bucketlist.id}),
+            reverse('details', kwargs={'lists': lists.id}),
             format='json',
             follow=True)
 
