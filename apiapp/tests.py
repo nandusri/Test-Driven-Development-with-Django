@@ -12,7 +12,7 @@ class ModelTestCase(TestCase):
 
     def test_model_can_create_a_list(self):
         """Test the bucketlist model can create a list."""
-        old_count = Bucketlist.objects.count()
+        old_count = List.objects.count()
         self.list.save()
-        new_count = Bucketlist.objects.count()
+        new_count = List.objects.count()
         self.assertNotEqual(old_count, new_count)
